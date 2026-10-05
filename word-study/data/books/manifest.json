@@ -1,0 +1,72 @@
+[
+  {
+    "id": "cet4",
+    "title": "四级词汇",
+    "category": "cet4",
+    "core": false,
+    "description": "按 ECDICT 考试分类整理。",
+    "source": "ECDICT · MIT",
+    "sourceUrl": "https://github.com/skywind3000/ECDICT",
+    "count": 3846
+  },
+  {
+    "id": "cet4-core",
+    "title": "四级词汇核心词汇",
+    "category": "cet4",
+    "core": true,
+    "description": "考试分类内优先选取非中高考基础词，再按 BNC / 当代语料库词频精选；不代表真题出现次数。",
+    "source": "ECDICT · MIT",
+    "sourceUrl": "https://github.com/skywind3000/ECDICT",
+    "count": 1200
+  },
+  {
+    "id": "cet6",
+    "title": "六级词汇",
+    "category": "cet6",
+    "core": false,
+    "description": "包含四级基础词与六级新增词。",
+    "source": "ECDICT · MIT",
+    "sourceUrl": "https://github.com/skywind3000/ECDICT",
+    "count": 5802
+  },
+  {
+    "id": "cet6-core",
+    "title": "六级词汇核心词汇",
+    "category": "cet6",
+    "core": true,
+    "description": "考试分类内优先选取非中高考基础词，再按 BNC / 当代语料库词频精选；不代表真题出现次数。",
+    "source": "ECDICT · MIT",
+    "sourceUrl": "https://github.com/skywind3000/ECDICT",
+    "count": 1500
+  },
+  {
+    "id": "kaoyan",
+    "title": "考研词汇",
+    "category": "kaoyan",
+    "core": false,
+    "description": "按 ECDICT 考试分类整理。",
+    "source": "ECDICT · MIT",
+    "sourceUrl": "https://github.com/skywind3000/ECDICT",
+    "count": 4801
+  },
+  {
+    "id": "kaoyan-core",
+    "title": "考研词汇核心词汇",
+    "category": "kaoyan",
+    "core": true,
+    "description": "考试分类内优先选取非中高考基础词，再按 BNC / 当代语料库词频精选；不代表真题出现次数。",
+    "source": "ECDICT · MIT",
+    "sourceUrl": "https://github.com/skywind3000/ECDICT",
+    "count": 2000
+  },
+  {
+    "id": "phrases",
+    "title": "常用短语",
+    "category": "phrases",
+    "core": false,
+    "description": "常见搭配、连接表达与动词短语。",
+    "source": "本项目整理",
+    "sourceUrl": "",
+    "count": 188
+  }
+]

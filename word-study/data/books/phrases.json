@@ -1,0 +1,1139 @@
+{
+  "id": "phrases",
+  "title": "常用短语",
+  "category": "phrases",
+  "core": false,
+  "description": "常见搭配、连接表达与动词短语。",
+  "source": "本项目整理",
+  "sourceUrl": "",
+  "words": [
+    {
+      "id": "a great deal of",
+      "english": "a great deal of",
+      "chinese": "大量的（修饰不可数名词）",
+      "phonetic": ""
+    },
+    {
+      "id": "a number of",
+      "english": "a number of",
+      "chinese": "许多；若干（修饰可数名词）",
+      "phonetic": ""
+    },
+    {
+      "id": "above all",
+      "english": "above all",
+      "chinese": "最重要的是；尤其是",
+      "phonetic": ""
+    },
+    {
+      "id": "according to",
+      "english": "according to",
+      "chinese": "根据；按照",
+      "phonetic": ""
+    },
+    {
+      "id": "account for",
+      "english": "account for",
+      "chinese": "解释；占……比例",
+      "phonetic": ""
+    },
+    {
+      "id": "add up to",
+      "english": "add up to",
+      "chinese": "总计为；意味着",
+      "phonetic": ""
+    },
+    {
+      "id": "ahead of time",
+      "english": "ahead of time",
+      "chinese": "提前",
+      "phonetic": ""
+    },
+    {
+      "id": "all of a sudden",
+      "english": "all of a sudden",
+      "chinese": "突然",
+      "phonetic": ""
+    },
+    {
+      "id": "all in all",
+      "english": "all in all",
+      "chinese": "总的来说",
+      "phonetic": ""
+    },
+    {
+      "id": "as a matter of fact",
+      "english": "as a matter of fact",
+      "chinese": "事实上",
+      "phonetic": ""
+    },
+    {
+      "id": "as a result",
+      "english": "as a result",
+      "chinese": "因此；结果",
+      "phonetic": ""
+    },
+    {
+      "id": "as a result of",
+      "english": "as a result of",
+      "chinese": "由于；作为……的结果",
+      "phonetic": ""
+    },
+    {
+      "id": "as far as",
+      "english": "as far as",
+      "chinese": "就……而言；直到",
+      "phonetic": ""
+    },
+    {
+      "id": "as long as",
+      "english": "as long as",
+      "chinese": "只要；长达",
+      "phonetic": ""
+    },
+    {
+      "id": "as soon as",
+      "english": "as soon as",
+      "chinese": "一……就……",
+      "phonetic": ""
+    },
+    {
+      "id": "as well",
+      "english": "as well",
+      "chinese": "也；同样",
+      "phonetic": ""
+    },
+    {
+      "id": "as well as",
+      "english": "as well as",
+      "chinese": "以及；除……之外也",
+      "phonetic": ""
+    },
+    {
+      "id": "at a loss",
+      "english": "at a loss",
+      "chinese": "不知所措；困惑",
+      "phonetic": ""
+    },
+    {
+      "id": "at first",
+      "english": "at first",
+      "chinese": "起初",
+      "phonetic": ""
+    },
+    {
+      "id": "at first sight",
+      "english": "at first sight",
+      "chinese": "乍一看",
+      "phonetic": ""
+    },
+    {
+      "id": "at hand",
+      "english": "at hand",
+      "chinese": "在手边；即将到来",
+      "phonetic": ""
+    },
+    {
+      "id": "at last",
+      "english": "at last",
+      "chinese": "终于",
+      "phonetic": ""
+    },
+    {
+      "id": "at least",
+      "english": "at least",
+      "chinese": "至少",
+      "phonetic": ""
+    },
+    {
+      "id": "at once",
+      "english": "at once",
+      "chinese": "立刻；同时",
+      "phonetic": ""
+    },
+    {
+      "id": "at present",
+      "english": "at present",
+      "chinese": "目前",
+      "phonetic": ""
+    },
+    {
+      "id": "at the same time",
+      "english": "at the same time",
+      "chinese": "同时",
+      "phonetic": ""
+    },
+    {
+      "id": "at times",
+      "english": "at times",
+      "chinese": "有时",
+      "phonetic": ""
+    },
+    {
+      "id": "back and forth",
+      "english": "back and forth",
+      "chinese": "来回地",
+      "phonetic": ""
+    },
+    {
+      "id": "be aware of",
+      "english": "be aware of",
+      "chinese": "意识到；知道",
+      "phonetic": ""
+    },
+    {
+      "id": "be capable of",
+      "english": "be capable of",
+      "chinese": "有能力做……",
+      "phonetic": ""
+    },
+    {
+      "id": "be concerned about",
+      "english": "be concerned about",
+      "chinese": "关心；担忧",
+      "phonetic": ""
+    },
+    {
+      "id": "be exposed to",
+      "english": "be exposed to",
+      "chinese": "接触到；暴露于",
+      "phonetic": ""
+    },
+    {
+      "id": "be familiar with",
+      "english": "be familiar with",
+      "chinese": "熟悉……",
+      "phonetic": ""
+    },
+    {
+      "id": "be fond of",
+      "english": "be fond of",
+      "chinese": "喜欢……",
+      "phonetic": ""
+    },
+    {
+      "id": "be in charge of",
+      "english": "be in charge of",
+      "chinese": "负责；主管",
+      "phonetic": ""
+    },
+    {
+      "id": "be likely to",
+      "english": "be likely to",
+      "chinese": "很可能……",
+      "phonetic": ""
+    },
+    {
+      "id": "be opposed to",
+      "english": "be opposed to",
+      "chinese": "反对……",
+      "phonetic": ""
+    },
+    {
+      "id": "be related to",
+      "english": "be related to",
+      "chinese": "与……有关",
+      "phonetic": ""
+    },
+    {
+      "id": "be responsible for",
+      "english": "be responsible for",
+      "chinese": "对……负责",
+      "phonetic": ""
+    },
+    {
+      "id": "be supposed to",
+      "english": "be supposed to",
+      "chinese": "应该；被期望",
+      "phonetic": ""
+    },
+    {
+      "id": "be used to",
+      "english": "be used to",
+      "chinese": "习惯于……",
+      "phonetic": ""
+    },
+    {
+      "id": "because of",
+      "english": "because of",
+      "chinese": "因为；由于",
+      "phonetic": ""
+    },
+    {
+      "id": "before long",
+      "english": "before long",
+      "chinese": "不久以后",
+      "phonetic": ""
+    },
+    {
+      "id": "break down",
+      "english": "break down",
+      "chinese": "发生故障；分解；崩溃",
+      "phonetic": ""
+    },
+    {
+      "id": "break out",
+      "english": "break out",
+      "chinese": "（战争、火灾等）爆发",
+      "phonetic": ""
+    },
+    {
+      "id": "bring about",
+      "english": "bring about",
+      "chinese": "导致；引起",
+      "phonetic": ""
+    },
+    {
+      "id": "bring up",
+      "english": "bring up",
+      "chinese": "提出；抚养",
+      "phonetic": ""
+    },
+    {
+      "id": "by accident",
+      "english": "by accident",
+      "chinese": "偶然；意外地",
+      "phonetic": ""
+    },
+    {
+      "id": "by all means",
+      "english": "by all means",
+      "chinese": "当然可以；尽一切办法",
+      "phonetic": ""
+    },
+    {
+      "id": "by means of",
+      "english": "by means of",
+      "chinese": "借助；通过",
+      "phonetic": ""
+    },
+    {
+      "id": "by no means",
+      "english": "by no means",
+      "chinese": "绝不",
+      "phonetic": ""
+    },
+    {
+      "id": "by the way",
+      "english": "by the way",
+      "chinese": "顺便说一下",
+      "phonetic": ""
+    },
+    {
+      "id": "call for",
+      "english": "call for",
+      "chinese": "需要；要求",
+      "phonetic": ""
+    },
+    {
+      "id": "call off",
+      "english": "call off",
+      "chinese": "取消",
+      "phonetic": ""
+    },
+    {
+      "id": "carry on",
+      "english": "carry on",
+      "chinese": "继续进行",
+      "phonetic": ""
+    },
+    {
+      "id": "carry out",
+      "english": "carry out",
+      "chinese": "执行；实施",
+      "phonetic": ""
+    },
+    {
+      "id": "catch up with",
+      "english": "catch up with",
+      "chinese": "赶上",
+      "phonetic": ""
+    },
+    {
+      "id": "come across",
+      "english": "come across",
+      "chinese": "偶然遇到；被理解",
+      "phonetic": ""
+    },
+    {
+      "id": "come up with",
+      "english": "come up with",
+      "chinese": "想出；提出",
+      "phonetic": ""
+    },
+    {
+      "id": "compare with",
+      "english": "compare with",
+      "chinese": "与……比较",
+      "phonetic": ""
+    },
+    {
+      "id": "concentrate on",
+      "english": "concentrate on",
+      "chinese": "集中注意力于",
+      "phonetic": ""
+    },
+    {
+      "id": "consist of",
+      "english": "consist of",
+      "chinese": "由……组成",
+      "phonetic": ""
+    },
+    {
+      "id": "contribute to",
+      "english": "contribute to",
+      "chinese": "有助于；促成；捐献给",
+      "phonetic": ""
+    },
+    {
+      "id": "cope with",
+      "english": "cope with",
+      "chinese": "应对；处理",
+      "phonetic": ""
+    },
+    {
+      "id": "count on",
+      "english": "count on",
+      "chinese": "依靠；指望",
+      "phonetic": ""
+    },
+    {
+      "id": "cut down on",
+      "english": "cut down on",
+      "chinese": "减少；削减",
+      "phonetic": ""
+    },
+    {
+      "id": "deal with",
+      "english": "deal with",
+      "chinese": "处理；应对；涉及",
+      "phonetic": ""
+    },
+    {
+      "id": "depend on",
+      "english": "depend on",
+      "chinese": "依靠；取决于",
+      "phonetic": ""
+    },
+    {
+      "id": "die out",
+      "english": "die out",
+      "chinese": "灭绝；逐渐消失",
+      "phonetic": ""
+    },
+    {
+      "id": "draw a conclusion",
+      "english": "draw a conclusion",
+      "chinese": "得出结论",
+      "phonetic": ""
+    },
+    {
+      "id": "due to",
+      "english": "due to",
+      "chinese": "由于；因为",
+      "phonetic": ""
+    },
+    {
+      "id": "end up",
+      "english": "end up",
+      "chinese": "最终处于；最终成为",
+      "phonetic": ""
+    },
+    {
+      "id": "even if",
+      "english": "even if",
+      "chinese": "即使",
+      "phonetic": ""
+    },
+    {
+      "id": "even though",
+      "english": "even though",
+      "chinese": "尽管；虽然",
+      "phonetic": ""
+    },
+    {
+      "id": "every now and then",
+      "english": "every now and then",
+      "chinese": "时不时；偶尔",
+      "phonetic": ""
+    },
+    {
+      "id": "face to face",
+      "english": "face to face",
+      "chinese": "面对面地",
+      "phonetic": ""
+    },
+    {
+      "id": "fall behind",
+      "english": "fall behind",
+      "chinese": "落后",
+      "phonetic": ""
+    },
+    {
+      "id": "far from",
+      "english": "far from",
+      "chinese": "远非；远离",
+      "phonetic": ""
+    },
+    {
+      "id": "figure out",
+      "english": "figure out",
+      "chinese": "弄清楚；计算出",
+      "phonetic": ""
+    },
+    {
+      "id": "fill in",
+      "english": "fill in",
+      "chinese": "填写；填补",
+      "phonetic": ""
+    },
+    {
+      "id": "find out",
+      "english": "find out",
+      "chinese": "查明；发现",
+      "phonetic": ""
+    },
+    {
+      "id": "first of all",
+      "english": "first of all",
+      "chinese": "首先",
+      "phonetic": ""
+    },
+    {
+      "id": "focus on",
+      "english": "focus on",
+      "chinese": "集中于；关注",
+      "phonetic": ""
+    },
+    {
+      "id": "for example",
+      "english": "for example",
+      "chinese": "例如",
+      "phonetic": ""
+    },
+    {
+      "id": "for instance",
+      "english": "for instance",
+      "chinese": "例如",
+      "phonetic": ""
+    },
+    {
+      "id": "for the sake of",
+      "english": "for the sake of",
+      "chinese": "为了……的利益",
+      "phonetic": ""
+    },
+    {
+      "id": "from now on",
+      "english": "from now on",
+      "chinese": "从现在起",
+      "phonetic": ""
+    },
+    {
+      "id": "from time to time",
+      "english": "from time to time",
+      "chinese": "不时；偶尔",
+      "phonetic": ""
+    },
+    {
+      "id": "get along with",
+      "english": "get along with",
+      "chinese": "与……相处；进展",
+      "phonetic": ""
+    },
+    {
+      "id": "get rid of",
+      "english": "get rid of",
+      "chinese": "摆脱；除去",
+      "phonetic": ""
+    },
+    {
+      "id": "get used to",
+      "english": "get used to",
+      "chinese": "逐渐习惯于",
+      "phonetic": ""
+    },
+    {
+      "id": "give in",
+      "english": "give in",
+      "chinese": "屈服；让步",
+      "phonetic": ""
+    },
+    {
+      "id": "give rise to",
+      "english": "give rise to",
+      "chinese": "导致；引起",
+      "phonetic": ""
+    },
+    {
+      "id": "give up",
+      "english": "give up",
+      "chinese": "放弃",
+      "phonetic": ""
+    },
+    {
+      "id": "go over",
+      "english": "go over",
+      "chinese": "检查；复习",
+      "phonetic": ""
+    },
+    {
+      "id": "go through",
+      "english": "go through",
+      "chinese": "经历；仔细检查",
+      "phonetic": ""
+    },
+    {
+      "id": "had better",
+      "english": "had better",
+      "chinese": "最好……",
+      "phonetic": ""
+    },
+    {
+      "id": "hand in",
+      "english": "hand in",
+      "chinese": "上交",
+      "phonetic": ""
+    },
+    {
+      "id": "have access to",
+      "english": "have access to",
+      "chinese": "能够获得；有权使用",
+      "phonetic": ""
+    },
+    {
+      "id": "have an effect on",
+      "english": "have an effect on",
+      "chinese": "对……有影响",
+      "phonetic": ""
+    },
+    {
+      "id": "have difficulty in",
+      "english": "have difficulty in",
+      "chinese": "做……有困难",
+      "phonetic": ""
+    },
+    {
+      "id": "hold on",
+      "english": "hold on",
+      "chinese": "等一下；坚持",
+      "phonetic": ""
+    },
+    {
+      "id": "in a sense",
+      "english": "in a sense",
+      "chinese": "在某种意义上",
+      "phonetic": ""
+    },
+    {
+      "id": "in a word",
+      "english": "in a word",
+      "chinese": "总之",
+      "phonetic": ""
+    },
+    {
+      "id": "in addition",
+      "english": "in addition",
+      "chinese": "此外",
+      "phonetic": ""
+    },
+    {
+      "id": "in addition to",
+      "english": "in addition to",
+      "chinese": "除……之外（还）",
+      "phonetic": ""
+    },
+    {
+      "id": "in advance",
+      "english": "in advance",
+      "chinese": "提前",
+      "phonetic": ""
+    },
+    {
+      "id": "in case",
+      "english": "in case",
+      "chinese": "以防；万一",
+      "phonetic": ""
+    },
+    {
+      "id": "in case of",
+      "english": "in case of",
+      "chinese": "如果发生；在……情况下",
+      "phonetic": ""
+    },
+    {
+      "id": "in charge of",
+      "english": "in charge of",
+      "chinese": "负责；主管",
+      "phonetic": ""
+    },
+    {
+      "id": "in common",
+      "english": "in common",
+      "chinese": "共同的；共有的",
+      "phonetic": ""
+    },
+    {
+      "id": "in contrast",
+      "english": "in contrast",
+      "chinese": "相比之下",
+      "phonetic": ""
+    },
+    {
+      "id": "in detail",
+      "english": "in detail",
+      "chinese": "详细地",
+      "phonetic": ""
+    },
+    {
+      "id": "in fact",
+      "english": "in fact",
+      "chinese": "事实上",
+      "phonetic": ""
+    },
+    {
+      "id": "in favor of",
+      "english": "in favor of",
+      "chinese": "赞成；支持",
+      "phonetic": ""
+    },
+    {
+      "id": "in general",
+      "english": "in general",
+      "chinese": "通常；总体上",
+      "phonetic": ""
+    },
+    {
+      "id": "in other words",
+      "english": "in other words",
+      "chinese": "换句话说",
+      "phonetic": ""
+    },
+    {
+      "id": "in particular",
+      "english": "in particular",
+      "chinese": "尤其；特别",
+      "phonetic": ""
+    },
+    {
+      "id": "in practice",
+      "english": "in practice",
+      "chinese": "在实践中；实际上",
+      "phonetic": ""
+    },
+    {
+      "id": "in return",
+      "english": "in return",
+      "chinese": "作为回报",
+      "phonetic": ""
+    },
+    {
+      "id": "in spite of",
+      "english": "in spite of",
+      "chinese": "尽管；不管",
+      "phonetic": ""
+    },
+    {
+      "id": "in terms of",
+      "english": "in terms of",
+      "chinese": "就……而言；在……方面",
+      "phonetic": ""
+    },
+    {
+      "id": "in the long run",
+      "english": "in the long run",
+      "chinese": "从长远来看",
+      "phonetic": ""
+    },
+    {
+      "id": "in time",
+      "english": "in time",
+      "chinese": "及时；迟早",
+      "phonetic": ""
+    },
+    {
+      "id": "instead of",
+      "english": "instead of",
+      "chinese": "代替；而不是",
+      "phonetic": ""
+    },
+    {
+      "id": "keep in mind",
+      "english": "keep in mind",
+      "chinese": "记住；牢记",
+      "phonetic": ""
+    },
+    {
+      "id": "keep up with",
+      "english": "keep up with",
+      "chinese": "跟上",
+      "phonetic": ""
+    },
+    {
+      "id": "lead to",
+      "english": "lead to",
+      "chinese": "导致；通向",
+      "phonetic": ""
+    },
+    {
+      "id": "leave out",
+      "english": "leave out",
+      "chinese": "遗漏；省略",
+      "phonetic": ""
+    },
+    {
+      "id": "let alone",
+      "english": "let alone",
+      "chinese": "更不用说",
+      "phonetic": ""
+    },
+    {
+      "id": "look after",
+      "english": "look after",
+      "chinese": "照顾",
+      "phonetic": ""
+    },
+    {
+      "id": "look forward to",
+      "english": "look forward to",
+      "chinese": "期待；盼望",
+      "phonetic": ""
+    },
+    {
+      "id": "look into",
+      "english": "look into",
+      "chinese": "调查",
+      "phonetic": ""
+    },
+    {
+      "id": "look up",
+      "english": "look up",
+      "chinese": "查阅；抬头看",
+      "phonetic": ""
+    },
+    {
+      "id": "make a difference",
+      "english": "make a difference",
+      "chinese": "产生影响；起作用",
+      "phonetic": ""
+    },
+    {
+      "id": "make up",
+      "english": "make up",
+      "chinese": "组成；编造；化妆；和好",
+      "phonetic": ""
+    },
+    {
+      "id": "make up for",
+      "english": "make up for",
+      "chinese": "弥补",
+      "phonetic": ""
+    },
+    {
+      "id": "make use of",
+      "english": "make use of",
+      "chinese": "利用",
+      "phonetic": ""
+    },
+    {
+      "id": "more or less",
+      "english": "more or less",
+      "chinese": "或多或少；大约",
+      "phonetic": ""
+    },
+    {
+      "id": "no longer",
+      "english": "no longer",
+      "chinese": "不再",
+      "phonetic": ""
+    },
+    {
+      "id": "now and then",
+      "english": "now and then",
+      "chinese": "偶尔",
+      "phonetic": ""
+    },
+    {
+      "id": "on account of",
+      "english": "on account of",
+      "chinese": "由于；因为",
+      "phonetic": ""
+    },
+    {
+      "id": "on behalf of",
+      "english": "on behalf of",
+      "chinese": "代表",
+      "phonetic": ""
+    },
+    {
+      "id": "on the contrary",
+      "english": "on the contrary",
+      "chinese": "相反",
+      "phonetic": ""
+    },
+    {
+      "id": "on the other hand",
+      "english": "on the other hand",
+      "chinese": "另一方面",
+      "phonetic": ""
+    },
+    {
+      "id": "on time",
+      "english": "on time",
+      "chinese": "准时",
+      "phonetic": ""
+    },
+    {
+      "id": "once in a while",
+      "english": "once in a while",
+      "chinese": "偶尔",
+      "phonetic": ""
+    },
+    {
+      "id": "out of date",
+      "english": "out of date",
+      "chinese": "过时的",
+      "phonetic": ""
+    },
+    {
+      "id": "out of order",
+      "english": "out of order",
+      "chinese": "发生故障；次序混乱",
+      "phonetic": ""
+    },
+    {
+      "id": "owing to",
+      "english": "owing to",
+      "chinese": "由于",
+      "phonetic": ""
+    },
+    {
+      "id": "pay attention to",
+      "english": "pay attention to",
+      "chinese": "注意……",
+      "phonetic": ""
+    },
+    {
+      "id": "pick up",
+      "english": "pick up",
+      "chinese": "捡起；接人；学会；好转",
+      "phonetic": ""
+    },
+    {
+      "id": "play a role in",
+      "english": "play a role in",
+      "chinese": "在……中起作用",
+      "phonetic": ""
+    },
+    {
+      "id": "point out",
+      "english": "point out",
+      "chinese": "指出",
+      "phonetic": ""
+    },
+    {
+      "id": "put forward",
+      "english": "put forward",
+      "chinese": "提出",
+      "phonetic": ""
+    },
+    {
+      "id": "put off",
+      "english": "put off",
+      "chinese": "推迟",
+      "phonetic": ""
+    },
+    {
+      "id": "put up with",
+      "english": "put up with",
+      "chinese": "忍受",
+      "phonetic": ""
+    },
+    {
+      "id": "regardless of",
+      "english": "regardless of",
+      "chinese": "不管；不顾",
+      "phonetic": ""
+    },
+    {
+      "id": "rely on",
+      "english": "rely on",
+      "chinese": "依靠；信赖",
+      "phonetic": ""
+    },
+    {
+      "id": "result from",
+      "english": "result from",
+      "chinese": "由……引起",
+      "phonetic": ""
+    },
+    {
+      "id": "result in",
+      "english": "result in",
+      "chinese": "导致；造成",
+      "phonetic": ""
+    },
+    {
+      "id": "run out of",
+      "english": "run out of",
+      "chinese": "用完；耗尽",
+      "phonetic": ""
+    },
+    {
+      "id": "set aside",
+      "english": "set aside",
+      "chinese": "留出；搁置",
+      "phonetic": ""
+    },
+    {
+      "id": "set up",
+      "english": "set up",
+      "chinese": "建立；设立",
+      "phonetic": ""
+    },
+    {
+      "id": "show up",
+      "english": "show up",
+      "chinese": "出现；到场",
+      "phonetic": ""
+    },
+    {
+      "id": "so far",
+      "english": "so far",
+      "chinese": "到目前为止",
+      "phonetic": ""
+    },
+    {
+      "id": "so that",
+      "english": "so that",
+      "chinese": "以便；结果是",
+      "phonetic": ""
+    },
+    {
+      "id": "sooner or later",
+      "english": "sooner or later",
+      "chinese": "迟早",
+      "phonetic": ""
+    },
+    {
+      "id": "stand for",
+      "english": "stand for",
+      "chinese": "代表；支持；容忍",
+      "phonetic": ""
+    },
+    {
+      "id": "stick to",
+      "english": "stick to",
+      "chinese": "坚持；遵守",
+      "phonetic": ""
+    },
+    {
+      "id": "such as",
+      "english": "such as",
+      "chinese": "例如；诸如",
+      "phonetic": ""
+    },
+    {
+      "id": "take advantage of",
+      "english": "take advantage of",
+      "chinese": "利用",
+      "phonetic": ""
+    },
+    {
+      "id": "take care of",
+      "english": "take care of",
+      "chinese": "照顾；处理",
+      "phonetic": ""
+    },
+    {
+      "id": "take into account",
+      "english": "take into account",
+      "chinese": "考虑到",
+      "phonetic": ""
+    },
+    {
+      "id": "take part in",
+      "english": "take part in",
+      "chinese": "参加",
+      "phonetic": ""
+    },
+    {
+      "id": "take place",
+      "english": "take place",
+      "chinese": "发生；举行",
+      "phonetic": ""
+    },
+    {
+      "id": "take the place of",
+      "english": "take the place of",
+      "chinese": "代替",
+      "phonetic": ""
+    },
+    {
+      "id": "thanks to",
+      "english": "thanks to",
+      "chinese": "多亏；由于",
+      "phonetic": ""
+    },
+    {
+      "id": "to some extent",
+      "english": "to some extent",
+      "chinese": "在某种程度上",
+      "phonetic": ""
+    },
+    {
+      "id": "turn down",
+      "english": "turn down",
+      "chinese": "拒绝；调低",
+      "phonetic": ""
+    },
+    {
+      "id": "turn out",
+      "english": "turn out",
+      "chinese": "结果是；生产",
+      "phonetic": ""
+    },
+    {
+      "id": "turn to",
+      "english": "turn to",
+      "chinese": "转向；求助于",
+      "phonetic": ""
+    },
+    {
+      "id": "up to date",
+      "english": "up to date",
+      "chinese": "最新的",
+      "phonetic": ""
+    },
+    {
+      "id": "used to",
+      "english": "used to",
+      "chinese": "过去常常……",
+      "phonetic": ""
+    },
+    {
+      "id": "what is more",
+      "english": "what is more",
+      "chinese": "而且；此外",
+      "phonetic": ""
+    },
+    {
+      "id": "with regard to",
+      "english": "with regard to",
+      "chinese": "关于；就……而言",
+      "phonetic": ""
+    },
+    {
+      "id": "work out",
+      "english": "work out",
+      "chinese": "解决；算出；锻炼",
+      "phonetic": ""
+    },
+    {
+      "id": "would rather",
+      "english": "would rather",
+      "chinese": "宁愿……",
+      "phonetic": ""
+    }
+  ]
+}

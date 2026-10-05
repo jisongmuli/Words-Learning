@@ -1,0 +1,5 @@
+data/user/
+__pycache__/
+output/
+*.log
+.playwright-cli/

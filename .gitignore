@@ -1,0 +1,9 @@
+word-study/data/user/
+word-study/output/
+**/__pycache__/
+**/.playwright-cli/
+# Retired local launch scripts; current launchers use Python.
+word-study/start.ps1
+word-study/stop.ps1
+.env
+.env.*
