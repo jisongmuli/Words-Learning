@@ -66,6 +66,7 @@ python server.py
 在 `word-study` 目录执行：
 
 ```powershell
+python -m pip install pypdf
 python tools/verify.py
 ```
 
