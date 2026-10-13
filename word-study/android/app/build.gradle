@@ -1,0 +1,42 @@
+plugins { id 'com.android.application' }
+
+def signingFile = rootProject.file('signing.properties')
+def signing = new Properties()
+if (signingFile.exists()) signingFile.withInputStream { signing.load(it) }
+
+android {
+    namespace 'com.jisongmuli.wordslearning'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.jisongmuli.wordslearning'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+        testInstrumentationRunner 'com.jisongmuli.wordslearning.SmokeTest'
+    }
+    signingConfigs {
+        release {
+            if (signingFile.exists()) {
+                storeFile rootProject.file(signing['storeFile'])
+                storePassword signing['storePassword']
+                keyAlias signing['keyAlias']
+                keyPassword signing['keyPassword']
+            }
+        }
+    }
+    buildTypes {
+        release { minifyEnabled false; signingConfig signingConfigs.release }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    sourceSets.main.assets.srcDir layout.buildDirectory.dir('generated/studyAssets')
+}
+
+// Package only the public UI and public wordbooks. Personal desktop records are never copied.
+tasks.register('syncStudyAssets', Sync) {
+    into layout.buildDirectory.dir('generated/studyAssets')
+    from('../../public') { exclude 'app.ico' }
+    from('../../data/books') { into 'books' }
+    from('../../data/ECDICT-LICENSE.txt')
+}
+tasks.named('preBuild').configure { dependsOn 'syncStudyAssets' }

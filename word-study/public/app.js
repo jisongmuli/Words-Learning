@@ -1,3 +1,4 @@
+import {isAndroid, mobileEngine, nativeFile} from './platform.js';
 const app = document.querySelector('#app');
 const icons = {
   book: '<path d="M4 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-3H4z"/><path d="M13 7a3 3 0 0 1 3-3h5v14h-4a4 4 0 0 0-4 3"/>',
@@ -12,8 +13,9 @@ const icons = {
 const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || icons.book}</svg>`;
 const esc = value => String(value ?? '').replace(/[&<>"']/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
 let data, view = 'library', activeBook, session, selected = new Set(), busy = false;
-let listBook, listPage = 1, saveQueue = Promise.resolve(), saveFailure = null;
+let listBook, listPage = 1, listQuery = '', saveQueue = Promise.resolve(), saveFailure = null;
 async function api(path, body) {
+  if(isAndroid) return (await mobileEngine()).request(path,body);
   const response = await fetch(path, body === undefined ? {} : {method:'POST', headers:{'Content-Type':'application/json','X-Study-Token':data.token},body:JSON.stringify(body)});
   const result = await response.json();
   if (!response.ok) throw new Error(result.error || '操作失败，请重试。');
@@ -22,7 +24,7 @@ async function api(path, body) {
 function toast(message) { const el = document.querySelector('#toast'); el.textContent = message; el.classList.add('visible'); clearTimeout(toast.timer); toast.timer = setTimeout(()=>el.classList.remove('visible'),4000); }
 async function refresh() { data = await api('/api/bootstrap'); }
 function shell(content) {
-  return `<aside class="sidebar"><a class="brand" href="#" data-action="library"><span class="brand-icon">${icon('book')}</span><span>拾词<small>WORD BY WORD</small></span></a><div class="nav-label">我的学习空间</div><nav><button class="nav-item ${view==='library'||view==='browse'?'active':''}" data-action="library">${icon('grid')}我的词书</button><button class="nav-item ${view==='study'?'active':''}" data-action="continue">${icon('flash')}单词速刷</button><button class="nav-item ${view==='unknown'?'active':''}" data-action="unknown">${icon('bookmark')}我的生词本<span class="nav-count">${data.unknownBook.count}</span></button></nav><div class="sidebar-bottom"><div class="local-status"><span></span>本地文件保存</div><p>每一次确认，都留下进步。</p><button class="nav-item" data-action="settings">${icon('settings')}学习设置</button></div></aside><div class="workspace"><header class="topbar"><span class="breadcrumb">学习空间 <b>/</b> ${{library:'我的词书',unknown:'我的生词本',browse:'浏览词书',study:'单词速刷'}[view]}</span><button class="setting-chip" data-action="settings">${icon('settings')}每轮 ${data.settings.batchSize} 词</button></header><main>${content}</main><footer class="page-footer"><span>拾词 · 每次专注一小组</span><span id="save-status">学习数据保存在这台电脑</span></footer></div>`;
+  return `<aside class="sidebar"><a class="brand" href="#" data-action="library"><span class="brand-icon">${icon('book')}</span><span>拾词<small>WORD BY WORD</small></span></a><div class="nav-label">我的学习空间</div><nav><button class="nav-item ${view==='library'||view==='browse'?'active':''}" data-action="library">${icon('grid')}我的词书</button><button class="nav-item ${view==='study'?'active':''}" data-action="continue">${icon('flash')}单词速刷</button><button class="nav-item ${view==='unknown'?'active':''}" data-action="unknown">${icon('bookmark')}我的生词本<span class="nav-count">${data.unknownBook.count}</span></button></nav><div class="sidebar-bottom"><div class="local-status"><span></span>本地文件保存</div><p>每一次确认，都留下进步。</p><button class="nav-item" data-action="settings">${icon('settings')}学习设置</button></div></aside><div class="workspace"><header class="topbar"><span class="breadcrumb">学习空间 <b>/</b> ${{library:'我的词书',unknown:'我的生词本',browse:'浏览词书',study:'单词速刷'}[view]}</span><button class="setting-chip" data-action="settings">${icon('settings')}每轮 ${data.settings.batchSize} 词</button></header><main>${content}</main><footer class="page-footer"><span>拾词 · 每次专注一小组</span><span id="save-status">学习数据保存在这台设备</span></footer></div>`;
 }
 function renderLibrary() {
   view = 'library';
@@ -33,7 +35,7 @@ function bookCard(book) {
   const color = {cet4:'blue',cet6:'purple',kaoyan:'orange',phrases:'teal'}[book.category];
   const code = {cet4:'CET<small>4</small>',cet6:'CET<small>6</small>',kaoyan:'POST<br><span>GRAD</span>',phrases:'PHR<br><span>ASES</span>'}[book.category];
   const pct = book.count ? Math.round(book.seen/book.count*100) : 0;
-  return `<article class="book-card ${color} ${book.core?'core':''} ${book.id==='phrases'?'phrase-card':''}"><div class="book-cover"><div class="cover-top">${book.core?'CORE VOCABULARY':'ENGLISH VOCABULARY'}</div><div class="cover-code">${code}</div><div class="cover-line"></div><div class="cover-bottom">${book.core?'核心精选':'循序积累'}<span>${book.count.toLocaleString()} WORDS</span></div></div><div class="book-info"><div class="book-tag">${book.core?'核心词汇':book.category==='phrases'?'常用表达':'考试词汇'}</div><h3>${esc(book.title)}</h3><div class="book-meta">${book.count.toLocaleString()} ${book.id==='phrases'?'个短语':'个单词'}<span>${book.core?'重点精选':'基础积累'}</span></div><div class="progress-row"><span>已刷 ${book.seen} / ${book.count}</span><b>${pct}%</b></div><div class="progress"><i style="width:${pct}%"></i></div><div class="book-actions"><button class="primary" data-action="start" data-book="${book.id}">${icon('flash')}${book.hasCurrent||book.seen?'继续速刷':'开始速刷'}</button><button class="icon-button" data-action="browse" data-book="${book.id}" aria-label="浏览${esc(book.title)}" title="浏览词书">${icon('book')}</button><button class="icon-button" data-action="pdf" data-book="${book.id}" aria-label="导出${esc(book.title)} PDF" title="导出 PDF">${icon('download')}</button></div></div></article>`;
+  return `<article class="book-card ${color} ${book.core?'core':''} ${book.id==='phrases'?'phrase-card':''}"><div class="book-cover"><div class="cover-top">${book.core?'CORE VOCABULARY':'VOCABULARY'}</div><div class="cover-code">${code}</div><div class="cover-line"></div><div class="cover-bottom">${book.core?'核心精选':'循序积累'}<span>${book.count.toLocaleString()} WORDS</span></div></div><div class="book-info"><div class="book-tag">${book.core?'核心词汇':book.category==='phrases'?'常用表达':'考试词汇'}</div><h3>${esc(book.title)}</h3><div class="book-meta">${book.count.toLocaleString()} ${book.id==='phrases'?'个短语':'个单词'}<span>${book.core?'重点精选':'基础积累'}</span></div><div class="progress-row"><span>已刷 ${book.seen} / ${book.count}</span><b>${pct}%</b></div><div class="progress"><i style="width:${pct}%"></i></div><div class="book-actions"><button class="primary" data-action="start" data-book="${book.id}">${icon('flash')}${book.hasCurrent||book.seen?'继续速刷':'开始速刷'}</button><button class="icon-button" data-action="browse" data-book="${book.id}" aria-label="浏览${esc(book.title)}" title="浏览词书">${icon('book')}</button><button class="icon-button" data-action="pdf" data-book="${book.id}" aria-label="导出${esc(book.title)} PDF" title="导出 PDF">${icon('download')}</button></div></div></article>`;
 }
 async function start(bookId) {
   if (busy) return;
@@ -41,12 +43,12 @@ async function start(bookId) {
   try {
     const result = await api('/api/start', {bookId});
     data.settings.lastBookId = bookId;
-    activeBook = result.book; session = result.session; selected = new Set(session?.selected || []); view = 'study'; renderStudy();
+    activeBook = result.book; session = result.session; selected = new Set(session?.selected || []); view = 'study'; renderStudy(); window.scrollTo(0,0);
   } finally { busy = false; }
 }
 function renderStudy() {
   const pct = activeBook.count ? Math.round(activeBook.seen/activeBook.count*100) : 0;
-  app.innerHTML = shell(`<div class="page-heading"><div><span class="eyebrow">QUICK REVIEW</span><h1>${esc(activeBook.title)}</h1><p>${activeBook.id==='unknown'?'仍不认识的词继续勾选，确认后，未勾选的词会移出生词本。':'勾选不认识的词，完成后查看中文释义。'}</p></div><button class="secondary" data-action="library">返回词书</button></div><div class="study-progress"><span>已刷 ${activeBook.seen} / ${activeBook.count}</span><div class="progress"><i style="width:${pct}%"></i></div><b>${pct}%</b><button data-action="settings">调整每轮词数</button></div>${session ? `<div class="study-panel"><div class="study-header"><span class="step-label">${session.stage==='review'?'02 核对释义':'01 标记陌生词'}</span><span>本轮 ${session.words.length} 词 · 已选 <b id="selected-count">${selected.size}</b> 词</span></div><div class="word-grid">${session.words.map((word,i)=>`<label class="word-item ${selected.has(word.id)?'selected':''}"><span class="word-number">${String(i+1).padStart(2,'0')}</span><span class="word-content"><strong>${esc(word.english)}</strong>${session.stage==='review'?`<span class="phonetic">${esc(word.phonetic?'/'+word.phonetic+'/':'')}</span><span class="meaning">${esc(word.chinese).replace(/\n/g,'<br>')}</span>`:''}</span><input type="checkbox" data-word="${esc(word.id)}" ${selected.has(word.id)?'checked':''} aria-label="不认识 ${esc(word.english)}"><span class="word-check">${icon('check')}</span></label>`).join('')}</div><div class="study-footer"><div><p>${session.stage==='review'?(activeBook.id==='unknown'?'未勾选的词表示已认识，确认后会移出生词本。':'核对后可以修正勾选，再确认保存。'):'勾选的词表示不认识，先凭记忆判断。'}</p>${session.stage==='review'?'<button class="text-button" data-action="back-to-select">返回英文继续判断</button>':''}</div><button class="primary" data-action="${session.stage==='review'?'complete':'reveal'}">${session.stage==='review'?'确认保存并下一轮':'查看全部释义'}</button></div></div>` : `<div class="empty-state">${icon('check')}<h2>${activeBook.count?'这本书已经刷完了':'生词本还是空的'}</h2><p>${activeBook.count?'这一遍已经完成，可以复习生词，也可以重新刷一遍。':'先选一本词书开始速刷，确认的陌生词会汇总到这里。'}</p><div class="empty-actions">${activeBook.count?'<button class="primary" data-action="restart">重新速刷</button>':'<button class="primary" data-action="library">去选词书</button>'}${activeBook.id!=='unknown'&&data.unknownBook.count?'<button class="secondary" data-action="unknown">复习生词</button>':''}</div></div>`}`);
+  app.innerHTML = shell(`<div class="page-heading"><div><span class="eyebrow">QUICK REVIEW</span><h1>${esc(activeBook.title)}</h1><p>${activeBook.id==='unknown'?'仍不认识的词继续勾选，确认后，未勾选的词会移出生词本。':'勾选不认识的词，完成后查看中文释义。'}</p></div><button class="secondary" data-action="library">返回词书</button></div><div class="study-progress"><span>已刷 ${activeBook.seen} / ${activeBook.count}</span><div class="progress"><i style="width:${pct}%"></i></div><b>${pct}%</b><button data-action="settings">调整每轮词数</button><button data-action="reset-book" data-book="${activeBook.id}">重置本书进度</button></div>${session ? `<div class="study-panel"><div class="study-header"><span class="step-label">${session.stage==='review'?'02 核对释义':'01 标记陌生词'}</span><span>本轮 ${session.words.length} 词 · 已选 <b id="selected-count">${selected.size}</b> 词</span></div><div class="word-grid">${session.words.map((word,i)=>`<label class="word-item ${selected.has(word.id)?'selected':''}"><span class="word-number">${String(i+1).padStart(2,'0')}</span><span class="word-content"><strong>${esc(word.english)}</strong>${session.stage==='review'?`<span class="phonetic">${esc(word.phonetic?'/'+word.phonetic+'/':'')}</span><span class="meaning">${esc(word.chinese).replace(/\n/g,'<br>')}</span>`:''}</span><input type="checkbox" data-word="${esc(word.id)}" ${selected.has(word.id)?'checked':''} aria-label="不认识 ${esc(word.english)}"><span class="word-check">${icon('check')}</span></label>`).join('')}</div><div class="study-footer"><div><p>${session.stage==='review'?(activeBook.id==='unknown'?'未勾选的词表示已认识，确认后会移出生词本。':'核对后可以修正勾选，再确认保存。'):'勾选的词表示不认识，先凭记忆判断。'}</p>${session.stage==='review'?'<button class="text-button" data-action="back-to-select">返回英文继续判断</button>':''}</div><button class="primary" data-action="${session.stage==='review'?'complete':'reveal'}">${session.stage==='review'?'确认保存并下一轮':'查看全部释义'}</button></div></div>` : `<div class="empty-state">${icon('check')}<h2>${activeBook.count?'这本书已经刷完了':'生词本还是空的'}</h2><p>${activeBook.count?'这一遍已经完成，可以复习生词，也可以重新刷一遍。':'先选一本词书开始速刷，确认的陌生词会汇总到这里。'}</p><div class="empty-actions">${activeBook.count?'<button class="primary" data-action="restart">重新速刷</button>':'<button class="primary" data-action="library">去选词书</button>'}${activeBook.id!=='unknown'&&data.unknownBook.count?'<button class="secondary" data-action="unknown">复习生词</button>':''}</div></div>`}`);
 }
 function setSaveStatus(message) { const el = document.querySelector('#save-status'); if(el) el.textContent = message; }
 function queueSelectionSave() {
@@ -83,26 +85,32 @@ async function completeRound() {
     session=null;
     await refresh();
     const next=await api('/api/start',{bookId});
-    activeBook=next.book; session=next.session; selected=new Set(session?.selected||[]); renderStudy();
+    activeBook=next.book; session=next.session; selected=new Set(session?.selected||[]); renderStudy(); window.scrollTo(0,0);
     toast(result.removed?`已复习 ${result.count} 词，${result.removed} 词移出生词本`:result.added?`已保存，${result.added} 个新词加入生词本`:`已保存本轮，生词本共 ${data.unknownBook.count} 词`);
   } finally { busy=false; }
 }
 async function openList(bookId) {
   await flushSelection(); await refresh();
-  listBook=await api('/api/book/'+encodeURIComponent(bookId)); listPage=1;
+  listBook=await api('/api/book/'+encodeURIComponent(bookId)); listPage=1; listQuery='';
   view=bookId==='unknown'?'unknown':'browse'; renderList();
 }
 function renderList() {
-  const total=listBook.words.length, pages=Math.max(1,Math.ceil(total/50)); listPage=Math.max(1,Math.min(listPage,pages));
-  const words=listBook.words.slice((listPage-1)*50,listPage*50), unknown=view==='unknown';
-  app.innerHTML=shell(`<div class="page-heading"><div><span class="eyebrow">${unknown?'YOUR PERSONAL COLLECTION':'INSIDE THE WORDBOOK'}</span><h1>${esc(listBook.title)}</h1><p>${unknown?'每一个生词，都有机会成为熟词。':`${total.toLocaleString()} 个词条 · 英文与中文对照`}</p></div>${unknown?'':'<button class="secondary" data-action="library">返回词书</button>'}</div><div class="list-toolbar"><span>${unknown?`共 <b>${total}</b> 个生词`:'完整词书'}</span><div><button class="secondary" data-action="pdf" data-book="${listBook.id}" ${total?'':'disabled'}>${icon('download')}导出 PDF</button><button class="primary" data-action="start" data-book="${listBook.id}" ${total?'':'disabled'}>${icon('flash')}${unknown?'速刷生词':'开始速刷'}</button></div></div>${!unknown?`<div class="source-note">${esc(listBook.description)} <span>来源：${listBook.sourceUrl?`<a href="${esc(listBook.sourceUrl)}" target="_blank" rel="noreferrer">${esc(listBook.source)}</a>`:esc(listBook.source)}</span></div>`:''}${total?`<div class="table-wrap"><table class="word-table"><thead><tr><th>英文</th><th>中文释义</th>${unknown?'<th class="source-column">来源 / 操作</th>':''}</tr></thead><tbody>${words.map(word=>`<tr><td><strong>${esc(word.english)}</strong>${word.phonetic?`<span class="phonetic">/${esc(word.phonetic)}/</span>`:''}</td><td>${esc(word.chinese).replace(/\n/g,'<br>')}</td>${unknown?`<td class="source-column"><span class="word-source">${esc((word.sources||[]).join('、')||'生词复习')}</span><button class="text-button" data-action="remove" data-word-id="${esc(word.id)}">已认识，移出</button></td>`:''}</tr>`).join('')}</tbody></table></div><div class="pagination"><span>第 ${(listPage-1)*50+1}–${Math.min(listPage*50,total)} 条 / 共 ${total} 条</span><div><button class="secondary" data-action="previous-page" ${listPage===1?'disabled':''}>上一页</button><span>${listPage} / ${pages}</span><button class="secondary" data-action="next-page" ${listPage===pages?'disabled':''}>下一页</button></div></div>`:`<div class="empty-state">${icon('bookmark')}<h2>生词本还是空的</h2><p>选择词书速刷，确认不认识的词会自动出现在这里。</p><button class="primary" data-action="library">去选词书</button></div>`}`);
+  const filtered=listBook.words.filter(word=>!listQuery||word.english.toLowerCase().includes(listQuery.toLowerCase())||word.chinese.includes(listQuery));
+  const total=filtered.length, pages=Math.max(1,Math.ceil(total/50)); listPage=Math.max(1,Math.min(listPage,pages));
+  const words=filtered.slice((listPage-1)*50,listPage*50), unknown=view==='unknown';
+  app.innerHTML=shell(`<div class="page-heading"><div><span class="eyebrow">${unknown?'YOUR PERSONAL COLLECTION':'INSIDE THE WORDBOOK'}</span><h1>${esc(listBook.title)}</h1><p>${unknown?'每一个生词，都有机会成为熟词。':`${total.toLocaleString()} 个词条 · 英文与中文对照`}</p></div>${unknown?'':'<button class="secondary" data-action="library">返回词书</button>'}</div><div class="list-toolbar"><span>${unknown?`共 <b>${total}</b> 个生词`:'完整词书'}</span><div><button class="secondary" data-action="reset-book" data-book="${listBook.id}">重置本书进度</button><button class="secondary" data-action="pdf" data-book="${listBook.id}" ${listBook.words.length?'':'disabled'}>${icon('download')}导出 PDF</button><button class="primary" data-action="start" data-book="${listBook.id}" ${listBook.words.length?'':'disabled'}>${icon('flash')}${unknown?'速刷生词':'开始速刷'}</button></div></div><form id="search-form" class="search-form" role="search"><label for="word-search">查找词条</label><input id="word-search" type="search" placeholder="输入英文或中文" value="${esc(listQuery)}" autocomplete="off"><button class="secondary" type="submit">搜索</button>${listQuery?'<button type="button" class="text-button" data-action="clear-search">清除</button>':''}</form>${!unknown?`<div class="source-note">${esc(listBook.description)} <span>来源：${listBook.sourceUrl?`<a href="${esc(listBook.sourceUrl)}" target="_blank" rel="noreferrer">${esc(listBook.source)}</a>`:esc(listBook.source)}</span></div>`:''}${total?`<div class="table-wrap"><table class="word-table"><thead><tr><th>英文</th><th>中文释义</th>${unknown?'<th class="source-column">来源 / 操作</th>':''}</tr></thead><tbody>${words.map(word=>`<tr><td><strong>${esc(word.english)}</strong>${word.phonetic?`<span class="phonetic">/${esc(word.phonetic)}/</span>`:''}</td><td>${esc(word.chinese).replace(/\n/g,'<br>')}</td>${unknown?`<td class="source-column"><span class="word-source">${esc((word.sources||[]).join('、')||'生词复习')}</span><button class="text-button" data-action="remove" data-word-id="${esc(word.id)}">已认识，移出</button></td>`:''}</tr>`).join('')}</tbody></table></div><div class="pagination"><span>第 ${(listPage-1)*50+1}–${Math.min(listPage*50,total)} 条 / 共 ${total} 条</span><div><button class="secondary" data-action="previous-page" ${listPage===1?'disabled':''}>上一页</button><span>${listPage} / ${pages}</span><button class="secondary" data-action="next-page" ${listPage===pages?'disabled':''}>下一页</button></div></div>`:`<div class="empty-state">${icon('bookmark')}<h2>${listQuery?'没有找到匹配词条':'生词本还是空的'}</h2><p>${listQuery?'试试其他英文或中文关键词。':'选择词书速刷，确认不认识的词会自动出现在这里。'}</p><button class="primary" data-action="library">去选词书</button></div>`}`);
 }
 function openSettings() {
   const dialog=document.querySelector('#settings-dialog');
-  dialog.innerHTML=`<form id="settings-form"><div class="dialog-heading"><div><span class="eyebrow">LEARNING PREFERENCES</span><h2 id="settings-title">按你的节奏学习</h2></div><button type="button" class="icon-button" data-dialog-close aria-label="关闭设置">${icon('close')}</button></div><label class="field-label" for="batch-size">每轮给我几个词</label><div class="number-field"><input id="batch-size" name="batchSize" type="number" min="1" max="100" step="1" value="${data.settings.batchSize}" required><span>词 / 轮</span></div><div class="presets">${[5,10,20,30,50].map(n=>`<button type="button" data-preset="${n}" class="${n===data.settings.batchSize?'chosen':''}">${n} 词</button>`).join('')}</div><p class="field-help">可设置 1–100 词。当前轮保持原词数，下轮开始生效。</p><label class="field-label" for="study-order">学习顺序</label><select id="study-order" name="order"><option value="sequence" ${data.settings.order==='sequence'?'selected':''}>按词书顺序</option><option value="random" ${data.settings.order==='random'?'selected':''}>随机选取未刷词</option></select><div class="backup-option"><span>学习数据备份<small>包含设置、进度和生词本</small></span><button type="button" class="secondary" id="backup-button">下载备份</button></div><div id="settings-error" class="form-error" role="alert"></div><button type="submit" class="primary full-width">保存设置</button></form>`;
+  dialog.innerHTML=`<form id="settings-form"><div class="dialog-heading"><div><span class="eyebrow">LEARNING PREFERENCES</span><h2 id="settings-title">按你的节奏学习</h2></div><button type="button" class="icon-button" data-dialog-close aria-label="关闭设置">${icon('close')}</button></div><label class="field-label" for="batch-size">每轮给我几个词</label><div class="number-field"><input id="batch-size" name="batchSize" type="number" min="1" max="100" step="1" value="${data.settings.batchSize}" required><span>词 / 轮</span></div><div class="presets">${[5,10,20,30,50].map(n=>`<button type="button" data-preset="${n}" class="${n===data.settings.batchSize?'chosen':''}">${n} 词</button>`).join('')}</div><p class="field-help">可设置 1–100 词。当前轮保持原词数，下轮开始生效。</p><label class="field-label" for="study-order">学习顺序</label><select id="study-order" name="order"><option value="sequence" ${data.settings.order==='sequence'?'selected':''}>按词书顺序</option><option value="random" ${data.settings.order==='random'?'selected':''}>随机选取未刷词</option></select><div class="backup-option"><span>学习数据备份<small>包含设置、进度和生词本</small></span><button type="button" class="secondary" id="backup-button">下载备份</button></div>${isAndroid?'<div class="backup-option"><span>从备份恢复<small>支持电脑和安卓导出的 JSON 文件</small></span><button type="button" class="secondary" id="import-button">导入备份</button></div><p class="field-help">数据保存在应用内。卸载或清除应用数据会删除记录，请先导出备份。</p>':''}<div id="settings-error" class="form-error" role="alert"></div><button type="submit" class="primary full-width">保存设置</button></form>`;
   dialog.showModal();
 }
 async function downloadFile(url,fallbackName) {
+  if(isAndroid) {
+    const engine=await mobileEngine();
+    const result=url.startsWith('/api/export/pdf') ? await nativeFile('pdf',JSON.stringify(engine.book(new URL(url,location.href).searchParams.get('bookId')))) : await nativeFile('backup',engine.exportState());
+    toast(result.cancelled?'已取消导出':'文件已保存到你选择的位置'); return;
+  }
   toast('正在准备导出文件……');
   const response=await fetch(url);
   if(!response.ok) { const error=await response.json(); throw new Error(error.error); }
@@ -134,7 +142,16 @@ app.addEventListener('click', async event => {
     else if(action==='browse') await openList(button.dataset.book);
     else if(action==='pdf') { button.disabled=true; try { await downloadFile('/api/export/pdf?bookId='+encodeURIComponent(button.dataset.book),(data.books.find(x=>x.id===button.dataset.book)?.title||'我的生词本')+'.pdf'); } finally { button.disabled=false; } }
     else if(action==='previous-page'||action==='next-page') { listPage+=action==='next-page'?1:-1; renderList(); window.scrollTo({top:0,behavior:'smooth'}); }
-    else if(action==='restart') await confirmAction('重新速刷这本书？','将开始新一遍速刷，生词本中的词会保留。',async()=> { await api('/api/restart',{bookId:activeBook.id}); await refresh(); await start(activeBook.id); });
+    else if(action==='restart'||action==='reset-book') {
+      const bookId=button.dataset.book||activeBook.id;
+      const title=bookId==='unknown'?'我的生词本':data.books.find(x=>x.id===bookId).title;
+      await confirmAction('重置《'+title+'》的进度？','只清空这一本的已刷进度、轮数和未完成轮次。其他词书、生词本及累计学习统计保留。',async()=>{
+        await flushSelection(); await api('/api/restart',{bookId}); session=null; selected.clear(); await refresh();
+        if(view==='study') await start(bookId); else await openList(bookId);
+        toast('已重置这一本词书的进度');
+      });
+    }
+    else if(action==='clear-search') { listQuery='';listPage=1;renderList(); }
     else if(action==='remove') await confirmAction('这个词已经认识了？','确认后会将它移出生词本。',async()=>{await api('/api/unknown/remove',{id:button.dataset.wordId});await openList('unknown');toast('已移出生词本');});
   } catch(error) { toast(error.message); }
 });
@@ -143,9 +160,21 @@ document.addEventListener('click',async event=>{
   if(event.target.closest('[data-dialog-close]')) event.target.closest('dialog').close();
   const preset=event.target.closest('[data-preset]');
   if(preset){document.querySelector('#batch-size').value=preset.dataset.preset;document.querySelectorAll('[data-preset]').forEach(button=>button.classList.toggle('chosen',button===preset));}
+  if(isAndroid && event.target.closest('#import-button')) {
+    const button=event.target.closest('#import-button'); button.disabled=true;
+    try {
+      await flushSelection(); const result=await nativeFile('import'); if(result.cancelled)return;
+      const engine=await mobileEngine(), candidate=engine.previewImport(result.value.replace(/^\uFEFF/,''));
+      const total=Object.values(candidate.daily).reduce((a,b)=>a+b,0);
+      await confirmAction('恢复这份学习备份？',`备份包含 ${Object.keys(candidate.unknown).length} 个生词，累计刷词 ${total} 次。确认后替换本设备的设置和全部学习进度，建议先导出当前备份。`,async()=>{
+        engine.importState(candidate); session=null;selected.clear();saveFailure=null;await refresh();document.querySelector('#settings-dialog').close();renderLibrary();toast('备份已恢复');
+      });
+    }catch(error){toast(error.message);}finally{button.disabled=false;}
+  }
   if(event.target.closest('#backup-button')){try{await flushSelection();await downloadFile('/api/export/backup','拾词学习备份.json');}catch(error){toast(error.message);}}
 });
 document.addEventListener('submit',async event=>{
+  if(event.target.id==='search-form'){event.preventDefault();listQuery=document.querySelector('#word-search').value.trim();listPage=1;renderList();return;}
   if(event.target.id!=='settings-form')return;
   event.preventDefault();const button=event.target.querySelector('[type=submit]');button.disabled=true;
   try{
@@ -164,3 +193,12 @@ if(document.modelContext?.registerTool){
   ]){try{Promise.resolve(document.modelContext.registerTool(tool,{signal:controller.signal})).catch(()=>{});}catch{}}
 }
 try { await refresh(); renderLibrary(); } catch(error) { app.innerHTML = `<div class="load-error"><h1>暂时无法打开词书</h1><p>${esc(error.message)}</p><button onclick="location.reload()">重新加载</button></div>`; }
+
+// The native Back button closes dialogs first, then returns to the library after saving.
+window.handleAndroidBack=()=>{
+  const dialogs=[...document.querySelectorAll('dialog[open]')];
+  if(dialogs.length){dialogs.at(-1).close();return true;}
+  if(busy)return true;
+  if(view!=='library'){flushSelection().then(refresh).then(()=>{renderLibrary();window.scrollTo(0,0);}).catch(e=>toast(e.message));return true;}
+  return false;
+};

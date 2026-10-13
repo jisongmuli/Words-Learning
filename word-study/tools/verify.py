@@ -75,6 +75,10 @@ def verify():
         finally:
             study.save_state = original_save
         assert study.load_state() == prior
+        study.mutate(lambda state: study.restart_book(state, {'bookId': 'cet4'}))
+        assert study.STATE['progress']['cet4'] == {'seen': [], 'rounds': 0, 'current': None}
+        assert study.STATE['progress']['cet6'] == prior['progress']['cet6']
+        assert study.STATE['unknown'] == prior['unknown'] and study.STATE['daily'] == prior['daily']
         print('PASS: seven books, core subsets, resume, custom batch, corrected selection, duplicate merge, short final round, unknown review, idempotency, atomic write failure')
         OUT.mkdir(parents=True, exist_ok=True)
         pdf = study.export_pdf(study.BOOKS['cet6'])

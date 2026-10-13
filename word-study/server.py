@@ -212,7 +212,7 @@ def restart_book(state, body):
     book_id = body.get('bookId')
     get_book(book_id, state)
     progress = book_progress(state, book_id)
-    progress['seen'], progress['current'] = [], None
+    progress['seen'], progress['current'], progress['rounds'] = [], None, 0
     return {'ok': True}
 
 

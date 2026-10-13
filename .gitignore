@@ -7,3 +7,9 @@ word-study/start.ps1
 word-study/stop.ps1
 .env
 .env.*
+word-study/android/.gradle/
+word-study/android/**/build/
+word-study/android/local.properties
+word-study/android/signing.properties
+word-study/android/keystore/
+word-study/android/*.log
